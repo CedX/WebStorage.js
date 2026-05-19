@@ -28,7 +28,7 @@ function Invoke-ESLint {
 		[string] $Configuration
 	)
 
-	$argumentList = "--cache", "--cache-location", "$PSScriptRoot/../var"
+	$argumentList = "--cache", "--cache-location", "$PSScriptRoot/../Temp"
 	if ($Configuration) { $argumentList += "--config", $Configuration }
 	$argumentList += $Path
 	npx eslint @argumentList
@@ -39,8 +39,8 @@ function Invoke-ESLint {
 	Invokes the Node.js test runner.
 #>
 function Invoke-NodeTest {
-	npx esbuild --bundle --legal-comments=none --log-level=warning --outfile=var/Tests.js --sourcemap test/Main.js
-	node test/Playwright.js
+	npx esbuild --bundle --legal-comments=none --log-level=warning --outfile=Temp/Tests.js --sourcemap Tests/Main.js
+	node Tests/Playwright.js
 }
 
 <#

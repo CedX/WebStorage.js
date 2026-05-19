@@ -3,8 +3,8 @@ Service for interacting with the [Web Storage](https://developer.mozilla.org/doc
 in [JavaScript](https://developer.mozilla.org/docs/Web/JavaScript).
 
 ## Documentation
-- [User guide](https://github.com/CedX/WebStorage.js/tree/main/docs)
-- [Examples](https://github.com/CedX/WebStorage.js/tree/main/example)
+- [User guide](https://github.com/CedX/WebStorage.js/tree/main/Documentation)
+- [Examples](https://github.com/CedX/WebStorage.js/tree/main/Examples)
 
 ## Development
 - [Git repository](https://github.com/CedX/WebStorage.js)

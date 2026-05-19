@@ -197,7 +197,7 @@ export default defineConfig(
 		}
 	},
 	{
-		files: ["test/**/*.js"],
+		files: ["Tests/**/*.js"],
 		rules: {
 			"prefer-arrow-callback": "off",
 			"@typescript-eslint/explicit-function-return-type": "off",

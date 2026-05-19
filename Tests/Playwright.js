@@ -8,7 +8,7 @@ import handler from "serve-handler";
 
 // Start the browser.
 const browser = await chromium.launch();
-const directory = join(import.meta.dirname, "../var");
+const directory = join(import.meta.dirname, "../Temp");
 const server = createServer((req, res) => handler(req, res, {public: directory})); // eslint-disable-line @typescript-eslint/no-misused-promises
 
 const page = await browser.newPage();

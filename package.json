@@ -19,7 +19,7 @@
 		"@types/node": "^25.9.3",
 		"@types/serve-handler": "^6.1.4",
 		"chai": "^6.2.2",
-		"esbuild": "^0.28.0",
+		"esbuild": "^0.28.1",
 		"globals": "^17.6.0",
 		"mocha": "^11.7.6",
 		"playwright": "^1.60.0",

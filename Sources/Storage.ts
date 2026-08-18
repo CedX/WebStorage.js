@@ -126,13 +126,14 @@ export class Storage extends EventTarget implements Disposable, Iterable<[string
 	}
 
 	/**
-	 * Registers a function that will be invoked whenever the `change` event is triggered.
+	 * Registers a function that will be invoked whenever the {@link changeEvent} event is triggered.
 	 * @param listener The event handler to register.
-	 * @returns This instance.
+	 * @returns An abort controller used to cancel the subscription to the {@link changeEvent} event.
 	 */
-	onChange(listener: (event: StorageEvent) => void): this {
-		this.addEventListener(Storage.changeEvent, listener as EventListener);
-		return this;
+	onChange(listener: (event: StorageEvent) => void): AbortController {
+		const abortController = new AbortController;
+		this.addEventListener(Storage.changeEvent, listener as EventListener, {signal: abortController.signal});
+		return abortController;
 	}
 
 	/**

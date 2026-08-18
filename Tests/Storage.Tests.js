@@ -187,8 +187,9 @@ describe("Storage", () => {
 			};
 
 			const service = Storage.session();
-			service.onChange(listener);
-			service.set("foo", "bar").removeEventListener(Storage.changeEvent, /** @type {EventListener} */ (listener));
+			const abortController = service.onChange(listener);
+			service.set("foo", "bar");
+			abortController.abort();
 		});
 
 		it("should trigger an event when a cookie is updated", () => {
@@ -200,8 +201,9 @@ describe("Storage", () => {
 			};
 
 			const service = Storage.session();
-			service.onChange(listener);
-			service.set("foo", "baz").removeEventListener(Storage.changeEvent, /** @type {EventListener} */ (listener));
+			const abortController = service.onChange(listener);
+			service.set("foo", "baz");
+			abortController.abort();
 		});
 
 		it("should trigger an event when a cookie is removed", () => {
@@ -213,9 +215,9 @@ describe("Storage", () => {
 			};
 
 			const service = Storage.session();
-			service.onChange(listener);
+			const abortController = service.onChange(listener);
 			service.delete("foo");
-			service.removeEventListener(Storage.changeEvent, /** @type {EventListener} */ (listener));
+			abortController.abort();
 		});
 
 		it("should handle the key prefix", () => {
@@ -226,8 +228,9 @@ describe("Storage", () => {
 			};
 
 			const service = Storage.local({keyPrefix: "prefix:"});
-			service.onChange(listener);
-			service.set("baz", "qux").removeEventListener(Storage.changeEvent, /** @type {EventListener} */ (listener));
+			const abortController = service.onChange(listener);
+			service.set("baz", "qux");
+			abortController.abort();
 		});
 	});
 

@@ -1,6 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import {Storage} from "@cedx/webstorage";
 import {assert} from "chai";
+import "chai/register-should.js";
 
 /**
  * Tests the features of the {@link Storage} class.
@@ -10,18 +11,18 @@ describe("Storage", () => {
 
 	describe("keys", () => {
 		it("should return an empty array for an empty storage", () =>
-			assert.isEmpty(Storage.session().keys));
+			Storage.session().keys.should.be.empty);
 
 		it("should return the list of keys for a non-empty storage", () => {
 			sessionStorage.setItem("foo", '"bar"');
 			sessionStorage.setItem("prefix:baz", '"qux"');
-			assert.sameOrderedMembers(Array.from(Storage.session().keys), ["foo", "prefix:baz"]);
+			Array.from(Storage.session().keys).should.have.ordered.members(["foo", "prefix:baz"]);
 		});
 
 		it("should handle the key prefix", () => {
 			sessionStorage.setItem("foo", '"bar"');
 			sessionStorage.setItem("prefix:baz", '"qux"');
-			assert.sameMembers(Array.from(Storage.session({keyPrefix: "prefix:"}).keys), ["baz"]);
+			Array.from(Storage.session({keyPrefix: "prefix:"}).keys).should.have.members(["baz"]);
 		});
 	});
 

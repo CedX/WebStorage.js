@@ -36,9 +36,9 @@ function Invoke-ESLint {
 
 <#
 .SYNOPSIS
-	Invokes the Node.js test runner.
+	Invokes the Mocha test runner.
 #>
-function Invoke-NodeTest {
+function Invoke-Mocha {
 	npx esbuild --bundle --legal-comments=none --log-level=warning --outfile=Temp/Tests.js --sourcemap Tests/Main.js
 	node Tests/Playwright.js
 }

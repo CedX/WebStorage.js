@@ -28,7 +28,7 @@ export class StorageEvent extends Event {
 	constructor(type: string, key: string, oldValue: unknown = null, newValue: unknown = null) {
 		super(type, {bubbles: true});
 		this.key = key;
-		this.newValue = newValue;
 		this.oldValue = oldValue;
+		this.newValue = newValue;
 	}
 }

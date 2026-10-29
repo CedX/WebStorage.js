@@ -51,7 +51,7 @@ await writeFile(join(directory, "Tests.html"), `
 			<script src="Tests.js"></script>
 			<script>
 				const runner = mocha.run();
-				runner.on("end", () => exit(runner.failures));
+				if (typeof exit == "function") runner.on("end", () => exit(runner.failures));
 			</script>
 		</body>
 	</html>
@@ -60,7 +60,5 @@ await writeFile(join(directory, "Tests.html"), `
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 server.listen({host: "127.0.0.1", port: 0}, async () => {
 	const {address, port} = /** @type {import("node:net").AddressInfo} */ (server.address());
-	console.log(browser.isConnected());
-	console.log(page.isClosed());
 	await page.goto(`http://${address}:${port}/Tests.html`);
 });

@@ -117,13 +117,13 @@ describe("Storage", () => {
 			should.not.exist(service.get("foo"));
 
 			sessionStorage.setItem("foo", '"bar"');
-			service.get("foo").should.equal("bar");
+			/** @type {string} */ (service.get("foo")).should.equal("bar");
 
 			sessionStorage.setItem("foo", "123");
-			service.get("foo").should.equal(123);
+			/** @type {number} */ (service.get("foo")).should.equal(123);
 
 			sessionStorage.setItem("foo", '{"key": "value"}');
-			service.get("foo").should.deep.equal({key: "value"});
+			/** @type {object} */ (service.get("foo")).should.deep.equal({key: "value"});
 
 			sessionStorage.setItem("foo", "{bar[123]}");
 			should.not.exist(service.get("foo"));
@@ -137,13 +137,13 @@ describe("Storage", () => {
 			should.not.exist(service.get("baz"));
 
 			sessionStorage.setItem("prefix:baz", '"qux"');
-			service.get("baz").should.equal("qux");
+			/** @type {string} */ (service.get("baz")).should.equal("qux");
 
 			sessionStorage.setItem("prefix:baz", "456");
-			service.get("baz").should.equal(456);
+			/** @type {number} */ (service.get("baz")).should.equal(456);
 
 			sessionStorage.setItem("prefix:baz", '{"key": "value"}');
-			service.get("baz").should.deep.equal({key: "value"});
+			/** @type {object} */ (service.get("baz")).should.deep.equal({key: "value"});
 
 			sessionStorage.setItem("prefix:baz", "{qux[456]}");
 			should.not.exist(service.get("baz"));
@@ -182,7 +182,7 @@ describe("Storage", () => {
 			const listener = (/** @type {import("@cedx/webstorage").StorageEvent} */ event) => {
 				event.key.should.equal("foo");
 				should.not.exist(event.oldValue);
-				event.newValue.should.equal("bar");
+				/** @type {number} */ (event.newValue).should.equal("bar"); // eslint-disable-line @typescript-eslint/no-unsafe-member-access
 				done();
 			};
 
@@ -196,8 +196,8 @@ describe("Storage", () => {
 			sessionStorage.setItem("foo", '"bar"');
 			const listener = (/** @type {import("@cedx/webstorage").StorageEvent} */ event) => {
 				event.key.should.equal("foo");
-				event.oldValue.should.equal("bar");
-				event.newValue.should.equal("baz");
+				/** @type {number} */ (event.oldValue).should.equal("bar"); // eslint-disable-line @typescript-eslint/no-unsafe-member-access
+				/** @type {number} */ (event.newValue).should.equal("baz"); // eslint-disable-line @typescript-eslint/no-unsafe-member-access
 				done();
 			};
 
@@ -211,7 +211,7 @@ describe("Storage", () => {
 			sessionStorage.setItem("foo", '"bar"');
 			const listener = (/** @type {import("@cedx/webstorage").StorageEvent} */ event) => {
 				event.key.should.equal("foo");
-				event.oldValue.should.equal("bar");
+				/** @type {number} */ (event.oldValue).should.equal("bar"); // eslint-disable-line @typescript-eslint/no-unsafe-member-access
 				should.not.exist(event.newValue);
 				done();
 			};
@@ -222,21 +222,19 @@ describe("Storage", () => {
 			abortController.abort();
 		});
 
-		// TODO!!!!
-		// it("should handle the key prefix", done => {
-		// 	const listener = (/** @type {import("@cedx/webstorage").StorageEvent} */ event) => {
-		// 		console.log(event);
-		// 		event.key.should.equal("baz");
-		// 		should.not.exist(event.oldValue);
-		// 		event.newValue.should.equal("qux");
-		// 		done();
-		// 	};
+		it("should handle the key prefix", done => {
+			const listener = (/** @type {import("@cedx/webstorage").StorageEvent} */ event) => {
+				event.key.should.equal("baz");
+				should.not.exist(event.oldValue);
+				/** @type {number} */ (event.newValue).should.equal("qux"); // eslint-disable-line @typescript-eslint/no-unsafe-member-access
+				done();
+			};
 
-		// 	const service = Storage.local({keyPrefix: "prefix:"});
-		// 	const abortController = service.onChange(listener);
-		// 	service.set("baz", "qux");
-		// 	abortController.abort();
-		// });
+			const service = Storage.local({keyPrefix: "prefix:"});
+			const abortController = service.onChange(listener);
+			service.set("baz", "qux");
+			abortController.abort();
+		});
 	});
 
 	context("set()", () => {

@@ -4,6 +4,7 @@ import {cp, writeFile} from "node:fs/promises";
 import {createServer} from "node:http";
 import {join} from "node:path";
 import process from "node:process";
+import {setTimeout} from "node:timers/promises";
 import {firefox} from "playwright";
 import handler from "serve-handler";
 
@@ -68,5 +69,6 @@ server.listen({host: "127.0.0.1", port: 0}, async () => {
 	await page.goto(`http://${address}:${port}/Tests.html`);
 
 	process.exitCode = await promise;
+	await setTimeout(1_000);
 	server.close();
 });

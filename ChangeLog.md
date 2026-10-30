@@ -1,5 +1,12 @@
 # Changelog
 
+## Version [2026.11.0](https://github.com/CedX/WebStorage.js/compare/v8.0.0...v2026.11.0)
+- Breaking change: raised the required [Node.js](https://nodejs.org) version.
+- Breaking change: the `Storage.keys` property is now implemented as `string[]`.
+- Breaking change: the `Storage.onChange()` method now returns an `AbortController` allowing to cancel the subscription.
+- Breaking change: removed the `Storage.toJSON()` method.
+- Switched to a year-based versioning.
+
 ## Version [8.0.0](https://github.com/CedX/WebStorage.js/compare/v7.2.0...v8.0.0)
 - Breaking change: the `Storage` class now **always** serializes/deserializes values to/from JSON.
 - Breaking change: removed the `getObject()` and `setObject()` methods from the `Storage` class.

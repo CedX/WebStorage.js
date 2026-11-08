@@ -23,9 +23,9 @@
 		"esbuild": "^0.28.2",
 		"globals": "^17.14.0",
 		"mocha": "^12.0.3",
-		"playwright": "^1.64.0",
-		"playwright-firefox": "^1.64.0",
-		"serve-handler": "^6.1.7",
+		"playwright": "^1.65.0",
+		"playwright-firefox": "^1.65.0",
+		"serve-handler": "^6.1.8",
 		"typescript": "npm:@typescript/typescript6@^6.0.2",
 		"typescript-eslint": "^8.72.1"
 	},

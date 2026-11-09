@@ -27,7 +27,7 @@
 		"playwright-firefox": "^1.65.0",
 		"serve-handler": "^6.1.8",
 		"typescript": "npm:@typescript/typescript6@^6.0.2",
-		"typescript-eslint": "^8.72.1"
+		"typescript-eslint": "^8.72.2"
 	},
 	"engines": {
 		"node": ">=26.0.0"

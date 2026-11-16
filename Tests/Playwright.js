@@ -57,7 +57,7 @@ server.listen({host: "127.0.0.1", port: 0}, async () => {
 	page.on("console", async message => {
 		const args = /** @type {unknown[]} */ (await Promise.all(message.args().map(arg => arg.jsonValue())));
 		if (args.length) console.log(args.shift(), ...args);
-		else console.log(message.text());
+		else { const text = message.text().trim(); if (text) console.log(text); }
 	});
 
 	// Run the test suite.
